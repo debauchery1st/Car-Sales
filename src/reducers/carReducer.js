@@ -18,13 +18,25 @@ const initialState = {
 export const carReducer = (state = initialState, action) => {
   switch (action.type) {
     case "ADD_FEATURE":
-      console.log("reducing");
-      console.log(action);
       return {
         ...state,
         car: {
           ...state.car,
           features: [...state.car.features, action.payload]
+        }
+      };
+    case "REMOVE_FEATURE":
+      const feat = state.car.features.find(ft => ft === action.payload);
+      const idx = state.car.features.indexOf(feat);
+      const nxt = [
+        ...state.car.features.slice(0, idx),
+        ...state.car.features.slice(idx + 1)
+      ];
+      return {
+        ...state,
+        car: {
+          ...state.car,
+          features: nxt
         }
       };
     default:
