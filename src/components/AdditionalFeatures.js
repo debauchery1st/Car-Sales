@@ -5,24 +5,20 @@ import AdditionalFeature from "./AdditionalFeature";
 const mapStateToProps = state => {
   return {
     features: state.carReducer.features,
-    additionalFeatures: state.carReducer.additionalFeatures
+    additionalFeatures: state.carReducer.additionalFeatures.filter(
+      ft => !state.carReducer.car.features.includes(ft)
+    )
   };
 };
 
 const AdditionalFeatures = props => {
   console.log(props);
-  const showing = () => {
-    if (!props.features) return props.additionalFeatures;
-    return props.additionalFeatures.filter(ft => !props.features.includes(ft));
-  };
-  const availableFeatures = showing();
-
   return (
     <div className="content">
       <h4>Additional Features</h4>
-      {availableFeatures.length > 0 ? (
+      {props.additionalFeatures.length > 0 ? (
         <ol type="1">
-          {availableFeatures.map(item => (
+          {props.additionalFeatures.map(item => (
             <AdditionalFeature key={item.id} feature={item} />
           ))}
         </ol>
