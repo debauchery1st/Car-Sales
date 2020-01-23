@@ -3,7 +3,10 @@ import { connect } from "react-redux";
 import AddedFeature from "./AddedFeature";
 
 const mapStateToProps = state => {
-  return { ...state.carReducer.car };
+  return {
+    ...state.carReducer.car,
+    additionalFeatures: state.carReducer.additionalFeatures
+  };
 };
 
 const AddedFeatures = props => {
